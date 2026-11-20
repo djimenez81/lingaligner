@@ -5,11 +5,37 @@ build-backend = "hatchling.build"
 [project]
 name = "lingaligner"
 version = "0.1.0"
-description = "Computes a feature system for a given collection of phones."
-# readme = "README.md"
-requires-python = ">=3.8"
-license = { text = "GPL-3.0-or-later" }
-authors = [
-    {name = "David Jiménez", email = "david.jimenezlopez@ucr.ac.cr"}
+description = "Sequence alignment and distance matrices for comparative linguistics."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "GPL-3.0-or-later"
+authors = [{ name = "David Jiménez" }]
+keywords = ["linguistics", "alignment", "distance", "phylogenetics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Text Processing :: Linguistic",
 ]
-dependencies = []
+dependencies = [
+    "lingcore>=0.1.0",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4", "pytest-cov>=5.0"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lingaligner"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 79
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
